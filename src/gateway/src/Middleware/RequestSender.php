@@ -33,9 +33,7 @@ class RequestSender implements MiddlewareInterface
         /** @var Request $sendRequest */
         $sendRequest = $request->getAttribute(RequestResolver::ATTR_SEND_REQUEST);
 
-        $client = new MeshHttpClient(null, [
-            'timeout' => 90,
-        ]);
+        $client = new MeshHttpClient();
         $response = $client->send($sendRequest);
         $request = $request->withAttribute(static::ATTR_SERVICE_RESPONSE, $response);
         $response = $delegate->process($request);
